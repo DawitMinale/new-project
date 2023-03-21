@@ -1,0 +1,138 @@
+
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.right=None
+        self.left=None
+    def depthFirstIterative(self,root):
+        stack=[root]
+        while(len(stack)>0):
+            current=stack.pop()
+            print(current.data)
+            if(current.right):
+                stack.append(current.right)
+            if(current.left):
+                stack.append(current.left)
+    def breadthFirstIterative(self,root):
+        stack=[root]
+        while(len(stack)>0):
+            current=stack[0]
+            stack=stack[1:]
+            print(current.data)
+            if(current.left):
+                stack.append(current.left)
+            if(current.right):
+                stack.append(current.right)
+    def depthFirstRecursive(self,root):
+        if root:
+            print(root.data)
+            self.depthFirstRecursive(root.left)
+            self.depthFirstRecursive(root.right)
+    def breadthFirstRecursive(self,root):
+        if root:
+            print(root.data)
+            self.breadthFirstRecursive(root.left)
+            self.breadthFirstRecursive(root.right)
+           
+            
+    def treeIncludes(self,root,target):
+        stack=[root]
+        while(len(stack)>0):
+            current=stack.pop()
+            if(current.data==target.data):
+                return True
+            if(current.right):
+                stack.append(current.right)
+            if(current.left):
+                stack.append(current.left)
+        return False
+    def treeSum(self,root):
+        sum=0
+        stack=[root]
+        while(len(stack)>0):
+            current=stack.pop()
+            sum+=current.data
+            if(current.left):
+                stack.append(current.left)
+            if(current.right):
+                stack.append(current.right)
+        print(sum)
+    def min(self,root):
+        min=root.data
+        stack=[root]
+        while(len(stack)>0):
+            current=stack.pop()
+            if(current.data<min):
+                min=current.data
+            if(current.left):
+                stack.append(current.left)
+            if(current.right):
+                stack.append(current.right)
+        print(min)
+    # def maxPathLeaf(self,root):
+    #     max=0
+    #     if root:
+    #         left=self.maxPathLeaf(root.left)
+    #         right=self.maxPathLeaf(root.right)
+    def is_leaf(self, root):
+        if root is None :
+            return 0
+        if (root.left is not None or root.right is not  None):
+            return self.is_leaf(root.left) + self.is_leaf(root.right)
+        elif(root.left is None and root.right is None):
+            return 1+self.is_leaf(root.left) + self.is_leaf(root.right)
+        
+    def non_leaf(self, root):
+        
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return 0
+        if root.left is not None or root.right  is not None:
+            return 1 + self.non_leaf(root.left) + self.non_leaf(root.right)
+       
+        
+        
+            
+      
+      
+        
+        
+        
+        
+        
+
+
+
+
+
+
+# a=Node('a')
+# b=Node('b')
+# c=Node('c')
+# d=Node('d')
+# e=Node('e')
+# f=Node('f')
+# g=Node('g')
+
+a=Node(10)
+b=Node(2)
+c=Node(3)
+d=Node(4)
+e=Node(5)
+f=Node(-2)
+g=Node(0)
+
+
+a.left=b
+a.right=c
+b.left=d
+b.right=e
+c.right=f
+# f.left=g
+
+print(a.is_leaf(a))
+print(a.non_leaf(a))
+
+        
